@@ -1,5 +1,7 @@
 #ATIVIDADE 3
+
 CALCULO DO IMC:
+
 Abaixo de 18,5 = Abaixo do peso,
 
 Entre 18,6 a 24,9 =  Peso ideal(Parabéns),
