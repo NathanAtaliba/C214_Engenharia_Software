@@ -1,3 +1,6 @@
+<head>
+	<title>Calculadora IMC</title>
+</head>
 <script>
 	// Variáveis de estado
 	let peso = 0;      // Peso do usuário
@@ -31,8 +34,6 @@
 	  }
 	}
   </script>
-
-
 <main>
 	<h1>Calculadora de IMC</h1>
 	<label>
