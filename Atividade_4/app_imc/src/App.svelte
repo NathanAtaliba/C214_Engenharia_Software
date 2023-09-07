@@ -1,6 +1,6 @@
 <script>
 	import IMC from "./IMC.svelte"
-	
+	import Swal from 'sweetalert2';
 	// Variáveis de estado
 	let disparo = 0;
 	let peso = 0;      // Peso do usuário
@@ -8,29 +8,44 @@
 	let imc = 0;       // Índice de Massa Corporal
 	let classificacao = '';
 	// Função para calcular o IMC
+	function mensagem(title,text,icon){
+	Swal.fire({
+		title: title,
+		text: text,
+		icon: icon,
+		confirmButtonText: 'Ok'
+	  });
+	}
 	function calcularIMC() {
 	if(disparo == 1 ){
 	  if (peso > 0 && altura > 0) {
 		imc = (peso / Math.pow(altura, 2)).toFixed(2);
 		if(imc < 18.5){
+			mensagem('Abaixo do peso','Coma mais!','warning')
 			classificacao = 'Abaixo do peso'
 		}
 		else if(imc >= 18.6 && imc <= 24.9){
+			mensagem('Peso ideal(Parabens)','Parabens','success')
 			classificacao = 'Peso ideal(Parabens)'
 		}
 		else if(imc >= 25 && imc <= 29.9){
+			mensagem('Levemente acima do peso','Esta OK','success')
 			classificacao = 'Levemente acima do peso'
 		}
 		else if(imc >= 30 && imc <= 34.9){
+			mensagem('Obesidade grau 1','Diminua um pouco a comida!','warning')
 			classificacao = 'Obesidade grau 1'
 		}
 		else if(imc >= 35 && imc <= 39.9){
+			mensagem('Obesidade grau 2 (severa)','Diminua a comida!','warning')
 			classificacao = 'Obesidade grau 2 (severa)'
 		}else{
+			mensagem('Obesidade grau 3 (mórbida)','Vamos maneirar ai!!!!','warning')
 			classificacao = 'Obesidade grau 3 (mórbida)'
 		}
 	  } else {
 		imc = 0;
+		mensagem('Preencha os campos corretamente','!!!','warning')
 		classificacao = 'Não existe!'
 	  }
 	}
