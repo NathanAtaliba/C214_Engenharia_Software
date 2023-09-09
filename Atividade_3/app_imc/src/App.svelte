@@ -1,5 +1,7 @@
 <script>
-	// Variáveis de estado
+	export let imcs = [];
+	import db from './db.js'
+	// Variáveis de estado	
 	let peso = 0;      // Peso do usuário
 	let altura = 0;    // Altura do usuário
 	let imc = 0;       // Índice de Massa Corporal

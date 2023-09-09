@@ -1,0 +1,19 @@
+{
+  "name": "atividade_5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "imc.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha",
+    "start": "nodemon imc.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.1"
+  }
+}
