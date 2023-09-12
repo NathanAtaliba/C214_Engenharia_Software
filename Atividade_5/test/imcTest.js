@@ -40,7 +40,7 @@ describe('Calculadora de IMC', () => {
         
         const IMCCalculado = calcIMC(peso, altura);
     
-        expect(IMCCalculado).to.equal('0.0');
+        expect(IMCCalculado).to.equal('0.00');
     });
 });
 
