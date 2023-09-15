@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/client.css">
+    <script src="JS/client.js"></script>
+    <title>Tasks</title>
+</head>
+<body>
+    <form class="form">
+        <h1>Tasks</h1>
+        <label class="label" id="label">Title:</label>
+        <input type="text" class="title" id="title" placeholder="Title">
+        <label class="label" id="label">Description:</label>
+        <input type="text" class="description" id="description" placeholder="Description">
+        <label class="label" id= "label">Status:</label>
+        <input type="text" class="status" id="status" placeholder="Status">   
+        <input type="button" class="buttonCreate" id="buttonCreate" value="Criar" onclick = "createTask()"> 
+        <input type="button" class="buttonSearch" id="buttonSearch" value="Buscar" onclick = "searchTask()">
+        <input type="button" class="buttonDelete" id="buttonDelete" value="Deletar" onclick = "deleteTask()">
+        <input type="button" class="buttonUpdate" id="buttonUpdate" value="Atualizar" onclick = "updateTask()">  
+    </form>
+    
+</body>
+</html>
