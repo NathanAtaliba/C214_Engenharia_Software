@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.1"
+  },
+  "scripts": {
+    "web": "node --watch src/server.js"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.11.97"
+  }
+}
