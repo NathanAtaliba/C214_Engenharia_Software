@@ -23,7 +23,7 @@ async function updateTask( req, res ){
     const title = req.body.title; 
     const description = req.body.description;
     const status = req.body.status;
-    const task = await Task.findByIdAndUpdate({"_id": id},{"title": title, "description": description, "status": status});
+    const task = await Task.findByIdAndUpdate({"_id": id},{"status": status});
     return res.status(200).send('Task atualizada com sucesso!');
 }
 
