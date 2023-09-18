@@ -35,10 +35,12 @@ describe('Testes das rotas de tasks:', function() {
     const response = await request(app)
     .post('/tasks')
     .send(newTarefa)
+    id = response.body["_id"];
     response.should.have.status(201);
     expect(newTarefa["title"]).to.eql(response.body["title"]);
     }catch(err) {
     console.log("Erro: " + err);
+    id = response.body["_id"];
     }
   });
 
@@ -47,16 +49,13 @@ describe('Testes das rotas de tasks:', function() {
     let taskUpdate = {
         "status": "Concluida",
     }
-    const resposta = 'Task atualizada com sucesso!';
-    try{
+    const resposta = "Task atualizada com sucesso!";
+    try{  
       const response = await request(app)
       .put(`/tasks/${id}`)
       .send(taskUpdate)
-
-      console.log(response.body);
-    
       response.should.have.status(200);
-      expect(resposta).to.eql(response.message);
+      expect(resposta).to.eql(response.text);
     }catch(error){
       console.log("Erro:" + error);
     }
@@ -67,13 +66,13 @@ describe('Testes das rotas de tasks:', function() {
     let taskDelete = {
       "title": "Fazer cafe",
   }
-  const resposta = 'Task atualizada com sucesso!';
+  const resposta = 'Task excluida com sucesso!';
   try{
   const response = await request(app)
   .delete(`/tasks/${id}`)
   .send(taskDelete)  
   response.should.have.status(200);
-  expect(reposta).to.eql(response.message);
+  expect(resposta).to.eql(response.text);
   }catch(error){
     console.log("Erro:" + error);
   }
