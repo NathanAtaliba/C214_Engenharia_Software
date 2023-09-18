@@ -58,6 +58,7 @@ async function createTask(){
         })
         .then((data) => {
           console.log('Resposta do servidor:', data);
+          alert('Foi criado uma Task!');
           reset();
         })
         .catch((error) => {
@@ -96,7 +97,6 @@ async function searchTask(){
 }
 async function updateTask(){
   const title = document.getElementById('title').value;
-  const description = document.getElementById('description').value;
   const status = document.getElementById('status').value;
   const myRequest1 = {
     method: 'GET',
