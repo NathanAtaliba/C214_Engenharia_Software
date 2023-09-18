@@ -13,5 +13,9 @@ app.use((req, res, next) => {
   });
 app.use(cors());
 app.use(routes);
-connectionDB();
+try{
+  connectionDB();
+}catch(error){
+  console.log('Ocorreu um erro: ', error);
+}
 export default app;
