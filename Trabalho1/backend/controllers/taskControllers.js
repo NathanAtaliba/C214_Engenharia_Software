@@ -17,7 +17,8 @@ async function deleteTask( req, res ){
 async function updateTask( req, res ){
     const id = req.params.id
     const status = req.body.status;
-    const task = await Task.findByIdAndUpdate({"_id": id}, {"status": status});
+    const description = req.body.description;
+    const task = await Task.findByIdAndUpdate({"_id": id}, {"status": status, "description": description});
     return res.status(200).send('Task atualizada com sucesso!');
 }
 

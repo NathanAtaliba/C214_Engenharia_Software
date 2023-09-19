@@ -14,6 +14,7 @@ async function createTask(){
     alert('Preencha todos os campos');
     reset();
   }else{
+    if(status == 'inprogress' || status == 'completed' || status == 'cancel'){
     const myRequest1 = {
       method: 'GET',
       headers: new Headers({
@@ -60,6 +61,7 @@ async function createTask(){
           console.log('Resposta do servidor:', data);
           alert('Foi criado uma Task!');
           reset();
+          location.reload(); 
         })
         .catch((error) => {
           console.error('Erro na solicitação:', error.message);
@@ -70,34 +72,68 @@ async function createTask(){
         reset();
       }  
     })
+}else{
+  alert('Entre com um valor de status como: inprogress, completed ou cancel');
 }
 }
-async function searchTask(){
-    const myRequest = {
-        method: 'GET',
-        headers: new Headers({
-            'Content-Type': 'application/json',
-        }),
-    };
-    fetch('http://localhost:3000/tasks', myRequest, {})
+}
+async function searchTask() {
+  const myRequest = {
+      method: 'GET',
+      headers: new Headers({
+          'Content-Type': 'application/json',
+      }),
+  };
+  fetch('http://localhost:3000/tasks', myRequest)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Erro na solicitação: ${response.status}`);
-        }
-        return response.json(); // Analisar a resposta JSON
+          if (!response.ok) {
+              throw new Error(`Erro na solicitação: ${response.status}`);
+          }
+          return response.json();
       })
       .then((data) => {
-        console.log('Resposta do servidor:', data);
-        reset();
+          console.log('Resposta do servidor:', data);
+          displayTasks(data); // Chama a função para exibir as tarefas
+          reset();
       })
       .catch((error) => {
-        console.error('Erro na solicitação:', error.message);
-        reset();
+          console.error('Erro na solicitação:', error.message);
+          reset();
       });
+}
+// Função para exibir as tarefas na tabela
+function displayTasks(tasks) {
+  const tableBody = document.querySelector('#taskTable tbody');
+  tableBody.innerHTML = ''; // Limpa o conteúdo atual da tabela
+
+  tasks.forEach((task) => {
+    const row = tableBody.insertRow(); // Cria uma nova linha na tabela
+    const titleCell = row.insertCell(0); // Cria uma célula para o título
+    const descriptionCell = row.insertCell(1); // Cria uma célula para a descrição
+    const statusCell = row.insertCell(2); // Cria uma célula para o status
+
+    // Preenche as células com os valores das tarefas
+    titleCell.textContent = task.title;
+    descriptionCell.textContent = task.description;
+    statusCell.textContent = task.status;
+
+    // Aplica as classes de status com base no status da tarefa
+    statusCell.classList.add('tableStatus'); // Adiciona a classe comum a todas as células de status
+
+    if (task.status === 'completed') {
+      statusCell.classList.add('completed');
+    } else if (task.status === 'inprogress') {
+      statusCell.classList.add('inprogress');
+    } else if (task.status === 'cancel') {
+      statusCell.classList.add('cancel');
+    }
+  });
 }
 async function updateTask(){
   const title = document.getElementById('title').value;
+  const description = document.getElementById('description').value;
   const status = document.getElementById('status').value;
+  if(status == 'inprogress' || status == 'completed' || status == 'cancel'){
   const myRequest1 = {
     method: 'GET',
     headers: new Headers({
@@ -133,21 +169,32 @@ fetch('http://localhost:3000/tasks', myRequest1, {})
           'Content-Type': 'application/json',
           }),
           body:JSON.stringify({
-            status: status
+            status: status,
+            description: description
           })
         };
         fetch(`http://localhost:3000/tasks/${id}`,(myRequest2))
         .then(response => {
           if (response.ok) {
+            alert(`Task atualizada com id: ${id}`);
             console.log(`Task atualizada com id: ${id}`);
+            reset();
           } else {
+            alert('Erro na requisição:', response.status);
             console.error('Erro na requisição:', response.status);
+            reset();
           }
         })
         .catch(error => {
+          alert('Erro na requisição:', error);
           console.error('Erro na requisição:', error);
+          reset();
         });
     }})
+}
+else{
+  alert('Entre com um valor de status como: inprogress, completed ou cancel');
+}
 }
 async function deleteTask(){
     const title = document.getElementById('title').value;
