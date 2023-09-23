@@ -6,6 +6,34 @@ function reset(){
   description.value = '';
   status.value = '';
 }
+// Função para exibir as tarefas na tabela
+function displayTasks(tasks) {
+  const tableBody = document.querySelector('#taskTable tbody');
+  tableBody.innerHTML = ''; // Limpa o conteúdo atual da tabela
+
+  tasks.forEach((task) => {
+    const row = tableBody.insertRow(); // Cria uma nova linha na tabela
+    const titleCell = row.insertCell(0); // Cria uma célula para o título
+    const descriptionCell = row.insertCell(1); // Cria uma célula para a descrição
+    const statusCell = row.insertCell(2); // Cria uma célula para o status
+
+    // Preenche as células com os valores das tarefas
+    titleCell.textContent = task.title;
+    descriptionCell.textContent = task.description;
+    statusCell.textContent = task.status;
+
+    // Aplica as classes de status com base no status da tarefa
+    statusCell.classList.add('tableStatus'); // Adiciona a classe comum a todas as células de status
+
+    if (task.status === 'Completed') {
+      statusCell.classList.add('Completed');
+    } else if (task.status === 'InProgress') {
+      statusCell.classList.add('InProgress');
+    } else if (task.status === 'ToDo') {
+      statusCell.classList.add('ToDo');
+    }
+  });
+}
 async function createTask(){
   let title = document.getElementById('title').value;
   let description = document.getElementById('description').value;
@@ -14,7 +42,7 @@ async function createTask(){
     alert('Preencha todos os campos');
     reset();
   }else{
-    if(status == 'inprogress' || status == 'completed' || status == 'cancel'){
+    if(status == 'InProgress' || status == 'Completed' || status == 'ToDo'){
     const myRequest1 = {
       method: 'GET',
       headers: new Headers({
@@ -73,7 +101,7 @@ async function createTask(){
       }  
     })
 }else{
-  alert('Entre com um valor de status como: inprogress, completed ou cancel');
+  alert('Entre com um valor de status como: (InProgress), (Completed) ou (Todo)');
 }
 }
 }
@@ -101,39 +129,11 @@ async function searchTask() {
           reset();
       });
 }
-// Função para exibir as tarefas na tabela
-function displayTasks(tasks) {
-  const tableBody = document.querySelector('#taskTable tbody');
-  tableBody.innerHTML = ''; // Limpa o conteúdo atual da tabela
-
-  tasks.forEach((task) => {
-    const row = tableBody.insertRow(); // Cria uma nova linha na tabela
-    const titleCell = row.insertCell(0); // Cria uma célula para o título
-    const descriptionCell = row.insertCell(1); // Cria uma célula para a descrição
-    const statusCell = row.insertCell(2); // Cria uma célula para o status
-
-    // Preenche as células com os valores das tarefas
-    titleCell.textContent = task.title;
-    descriptionCell.textContent = task.description;
-    statusCell.textContent = task.status;
-
-    // Aplica as classes de status com base no status da tarefa
-    statusCell.classList.add('tableStatus'); // Adiciona a classe comum a todas as células de status
-
-    if (task.status === 'completed') {
-      statusCell.classList.add('completed');
-    } else if (task.status === 'inprogress') {
-      statusCell.classList.add('inprogress');
-    } else if (task.status === 'cancel') {
-      statusCell.classList.add('cancel');
-    }
-  });
-}
 async function updateTask(){
   const title = document.getElementById('title').value;
   const description = document.getElementById('description').value;
   const status = document.getElementById('status').value;
-  if(status == 'inprogress' || status == 'completed' || status == 'cancel'){
+  if(status == 'InProgress' || status == 'Completed' || status == 'Todo'){
   const myRequest1 = {
     method: 'GET',
     headers: new Headers({
@@ -193,13 +193,11 @@ fetch('http://localhost:3000/tasks', myRequest1, {})
     }})
 }
 else{
-  alert('Entre com um valor de status como: inprogress, completed ou cancel');
+  alert('Entre com um valor de status como: (InProgress), (Completed) ou (Todo)');
 }
 }
 async function deleteTask(){
     const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-    const status = document.getElementById('status').value;
 
     const myRequest = {
         method: 'GET',
