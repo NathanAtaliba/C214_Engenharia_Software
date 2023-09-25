@@ -14,7 +14,7 @@
 
 ## Testes:
 ### Foram feitos os seguintes testes:
-- Procurar todas tasks
-- Adicionar uma tasks
+- Procurar todas tasks.
+- Adicionar uma task.
 - Atualizar uma task pelo id.
 - Deletar uma task pelo id.
