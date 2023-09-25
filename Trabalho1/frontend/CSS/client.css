@@ -128,15 +128,15 @@ body{
     text-align: center;
 }
 
-.tableStatus.completed {
+.tableStatus.Completed {
     background-color: green;
 }
 
-.tableStatus.inprogress {
+.tableStatus.InProgress {
     background-color: orange;
 }
 
-.tableStatus.cancel {
+.tableStatus.ToDo {
     background-color: red;
 }
 
