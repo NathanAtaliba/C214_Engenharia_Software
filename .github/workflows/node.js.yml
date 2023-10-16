@@ -27,10 +27,10 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '18' 
-        path: Trabalho1
+        path: ../Trabalho1
+
     - name: Instalar dependências
       run: npm install
       
-    
     - name: Executar testes
       run: npm test
