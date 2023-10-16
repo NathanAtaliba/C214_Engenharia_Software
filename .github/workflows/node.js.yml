@@ -31,6 +31,7 @@ jobs:
 
     - name: Instalar dependências
       run: npm install
+      path: ../Trabalho1
       
     - name: Executar testes
       run: npm test
