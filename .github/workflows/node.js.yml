@@ -9,17 +9,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+    - name: Chekout do código
+      uses: actions/chekout@v2
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
+        node-version: '18'
+        
+    - name: Configurar Node.Js
+      uses: actions/setup-node@v2
+
+    - name: Instalar dependencias
+      run: npm install
+    
+    - name: Executar testes
     - run: npm test
