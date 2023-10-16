@@ -16,12 +16,13 @@ jobs:
       deployments: write
       contents: read
       actions: read
-      
+
     steps:
     - name: Chekout do código
       uses: actions/chekout@v2
       with:
         node-version: '18'
+        repository: Trabalho1
     
     - name: Configurar Node.Js
       uses: actions/setup-node@v2
