@@ -1,37 +1,39 @@
-name: Node.js CI
+  name: Node.js CI
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  on:
+    push:
+      branches: [main]
+    pull_request:
+      branches: [main]
 
-permissions: read-all
+  permissions: read-all
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      deployments: write
-      contents: read
-      actions: read
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      permissions:
+        packages: write
+        deployments: write
+        contents: read
+        actions: read
 
-    steps:
-    - name: Checkout do código
-      uses: actions/checkout@v2
-      with:
-        node-version: '18' 
-    
-    - name: Configurar Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18' 
-        path: ../Trabalho1
-
-    - name: Instalar dependências
-      run: npm install
-      path: ../Trabalho1
+      steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+        with:
+          node-version: '18' 
       
-    - name: Executar testes
-      run: npm test
+      - name: Configurar Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' 
+          path: ../Trabalho1
+
+      - name: Instalar dependências
+        with:
+          path: ../Trabalho1
+        run: npm install
+        
+        
+      - name: Executar testes
+        run: npm test
